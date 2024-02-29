@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const userRoute = require("./routes/user");
 const connectDB = require("./config/db");
+const cookieParser = require("cookie-parser");
 
 const port = 8000;
 const app = express();
@@ -12,6 +13,7 @@ connectDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 //Routes
 app.use("/user", userRoute);

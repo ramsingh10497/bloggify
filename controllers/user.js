@@ -22,8 +22,10 @@ const handleSignin = async (req, res) => {
         .status(400)
         .json({ error: "please enter the valid credentials" });
 
-    await User.matchPassword(email, password);
-    return res.status(200).json({ message: "User Loggedin successfully" });
+    const token = await User.matchPasswordAndGenerateToken(email, password);
+    return res
+      .cookie("token", token)
+      .json({ message: "User Loggedin successfully", token });
   } catch (error) {
     res.status(400).json({ error: error.message ?? error });
   }

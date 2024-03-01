@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 
 const userRoute = require("./routes/user");
 const blogRoute = require("./routes/blog");
+const commentRoute = require("./routes/comment");
 
 const connectDB = require("./config/db");
 const { checkForAuthenticationCookies } = require("./middlewares/auth");
@@ -22,6 +23,7 @@ app.use(cookieParser());
 //Routes
 app.use("/user", userRoute);
 app.use("/blog", checkForAuthenticationCookies, blogRoute);
+app.use("/comment", checkForAuthenticationCookies, commentRoute);
 
 app.listen(port, (err, res) => {
   if (err) {

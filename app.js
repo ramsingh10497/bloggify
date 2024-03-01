@@ -1,8 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const userRoute = require("./routes/user");
-const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
+
+const userRoute = require("./routes/user");
+const blogRoute = require("./routes/blog");
+
+const connectDB = require("./config/db");
+const { checkForAuthenticationCookies } = require("./middlewares/auth");
 
 const port = 8000;
 const app = express();
@@ -17,6 +21,7 @@ app.use(cookieParser());
 
 //Routes
 app.use("/user", userRoute);
+app.use("/blog", checkForAuthenticationCookies, blogRoute);
 
 app.listen(port, (err, res) => {
   if (err) {

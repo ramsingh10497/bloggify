@@ -35,7 +35,6 @@ const userSchema = new mongoose.Schema(
 
 userSchema.pre("save", function (next) {
   const user = this;
-  console.log("comes in this sectin");
   if (!user.isModified("password")) return;
 
   const salt = randomBytes(16).toString();

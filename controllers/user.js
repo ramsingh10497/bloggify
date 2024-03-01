@@ -31,7 +31,12 @@ const handleSignin = async (req, res) => {
   }
 };
 
+const handleLogout = (req, res) => {
+  return res.clearCookie("token").json({ message: "User Logout successfully" });
+};
+
 module.exports = {
   handleSignup,
   handleSignin,
+  handleLogout,
 };

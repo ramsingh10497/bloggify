@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 const userRoute = require("./routes/user");
 const blogRoute = require("./routes/blog");
@@ -9,7 +10,7 @@ const commentRoute = require("./routes/comment");
 const connectDB = require("./config/db");
 const { checkForAuthenticationCookies } = require("./middlewares/auth");
 
-const port = 8000;
+const port = process.env.PORT || 8000;
 const app = express();
 
 // Connect MongoDB
